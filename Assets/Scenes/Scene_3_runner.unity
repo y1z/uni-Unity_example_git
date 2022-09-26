@@ -260,8 +260,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 836230917
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6461a4f00277d4340b05ef5f3f78ae22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -432,6 +432,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
+    - target: {fileID: 1480108872440839452, guid: 60c95ca32106a1d4dbb4e8be148c696e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1480108872440839452, guid: 60c95ca32106a1d4dbb4e8be148c696e, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1480108872440839454, guid: 60c95ca32106a1d4dbb4e8be148c696e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -475,6 +483,14 @@ PrefabInstance:
     - target: {fileID: 1480108872440839454, guid: 60c95ca32106a1d4dbb4e8be148c696e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1480108872440839455, guid: 60c95ca32106a1d4dbb4e8be148c696e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1480108872440839455, guid: 60c95ca32106a1d4dbb4e8be148c696e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1339795341
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60c95ca32106a1d4dbb4e8be148c696e, type: 3}
@@ -577,6 +593,14 @@ PrefabInstance:
     - target: {fileID: 7193786140557663296, guid: c65efc4e26d4bd941956870574fdb8ad, type: 3}
       propertyPath: m_Name
       value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7193786140557663297, guid: c65efc4e26d4bd941956870574fdb8ad, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7193786140557663297, guid: c65efc4e26d4bd941956870574fdb8ad, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1339795341
       objectReference: {fileID: 0}
     - target: {fileID: 7193786140557663302, guid: c65efc4e26d4bd941956870574fdb8ad, type: 3}
       propertyPath: m_RootOrder
