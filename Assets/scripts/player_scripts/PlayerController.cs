@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
   public float jumpForce = DEFAULT_JUMP_FORCE;
   public bool isGrounded = true;
   private bool _do_jump = false;
+  private bool _is_dead = false;
 
   public Rigidbody2D rigidbody = null;
   public Animator animator = null;
@@ -29,12 +30,14 @@ public class PlayerController : MonoBehaviour
     spriteRenderer = GetComponent<SpriteRenderer>();
     animator = GetComponent<Animator>();
     _do_jump = false;
+    _is_dead = false;
+    horizontalInput = 0.0f;
   }
 
 
   void Update()
   {
-    horizontalInput = Input.GetAxis("Horizontal");
+    //horizontalInput = Input.GetAxis("Horizontal");
     transform.Translate(Vector3.right * (horizontalInput * runningSpeed * Time.deltaTime));
 
     if (Input.GetButton("Jump") && isGrounded)
@@ -62,6 +65,19 @@ public class PlayerController : MonoBehaviour
       isGrounded = true;
     }
   }
+
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    
+    if (other.gameObject.CompareTag("Obstacle"))
+    {
+      print("|I Just died f in the chat BOIZ");
+      transform.position = new Vector3( 1337,1337,0);
+      _is_dead = true;
+    }
+  }
+
+  public bool isDead() => _is_dead;
 
   void flip_sprite(float direction)
   {
