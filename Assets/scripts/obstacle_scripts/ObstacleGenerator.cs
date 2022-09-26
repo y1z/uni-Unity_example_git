@@ -23,19 +23,21 @@ public class ObstacleGenerator : MonoBehaviour
     void Update()
     {
         time_passed += Time.deltaTime;
-        if (time_passed >= time_until_next_spawn)
+
+        if (!_controller.isDead())
         {
-           obj_to_delete.Add(Instantiate(prefab, transform.position, Quaternion.identity) );
-           time_passed = 0;
-           if (!_controller.isDead())
-           {
-               remove_obstacles_player_dodged();   
-           }   
-            
+         
+            if (time_passed >= time_until_next_spawn)
+            {
+                obj_to_delete.Add(Instantiate(prefab, transform.position, Quaternion.identity) );
+                time_passed = 0;
+
+
+                remove_obstacles_player_dodged();
+
+            }   
         }
-
-
-
+        
     }
 
 
