@@ -8,6 +8,7 @@ public class ObstacleGenerator : MonoBehaviour
 
     private PlayerController _controller = null;
     public GameObject prefab = null;
+    public GameObject spawn_position = null;
     public List< GameObject > obj_to_delete = null;
     public float time_until_next_spawn = 3.0f;
     public float time_passed = 0.0f;
@@ -16,7 +17,8 @@ public class ObstacleGenerator : MonoBehaviour
         _controller = FindObjectOfType<PlayerController>();
         Debug.Assert(prefab != null);
         Debug.Assert(_controller!= null);
-        
+        spawn_position = GameObject.FindGameObjectWithTag("Spawn Pos");
+
     }
 
     // Update is called once per frame
@@ -29,12 +31,9 @@ public class ObstacleGenerator : MonoBehaviour
          
             if (time_passed >= time_until_next_spawn)
             {
-                obj_to_delete.Add(Instantiate(prefab, transform.position, Quaternion.identity) );
-                time_passed = 0;
-
-
+                obj_to_delete.Add(Instantiate(prefab,spawn_position.transform.position, Quaternion.identity) );
                 remove_obstacles_player_dodged();
-
+                time_passed = 0;
             }   
         }
         
