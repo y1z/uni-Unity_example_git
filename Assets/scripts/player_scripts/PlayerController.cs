@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
 
   public Rigidbody2D rigidbody = null;
   public Animator animator = null;
-  private SpriteRenderer spriteRenderer = null;
   private static readonly int SpeedID = Animator.StringToHash("speed");
 
   [SerializeField] private LayerMask _layerMask;
@@ -27,7 +26,6 @@ public class PlayerController : MonoBehaviour
   private void Awake()
   {
     rigidbody = GetComponent<Rigidbody2D>();
-    spriteRenderer = GetComponent<SpriteRenderer>();
     animator = GetComponent<Animator>();
     _do_jump = false;
     _is_dead = false;
@@ -37,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
   void Update()
   {
-    //horizontalInput = Input.GetAxis("Horizontal");
+    horizontalInput = Input.GetAxis("Horizontal");
     transform.Translate(Vector3.right * (horizontalInput * runningSpeed * Time.deltaTime));
 
     if (Input.GetButtonDown("Jump") && isGround())
@@ -50,11 +48,9 @@ public class PlayerController : MonoBehaviour
 
   private void FixedUpdate()
   {
-    if (_do_jump)
-    {
-      this.rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-      _do_jump = false;
-    }
+    if (!_do_jump) return;
+    this.rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    _do_jump = false;
   }
 
   private void OnTriggerEnter2D(Collider2D other)
@@ -72,13 +68,16 @@ public class PlayerController : MonoBehaviour
 
   void flip_sprite(float direction)
   {
-    if (direction > 0.001f)
+    Vector2 localScale = transform.localScale;
+    if (direction > float.Epsilon)
     {
-      spriteRenderer.flipX = false;
+      localScale.x = 1.0f;
+      transform.localScale = localScale;
     }
-    else if (direction < -0.001f)
+    else if (direction < -float.Epsilon)
     {
-      spriteRenderer.flipX = true;
+      localScale.x = -1.0f;
+      transform.localScale = localScale;
     }
 
   }
