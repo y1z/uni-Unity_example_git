@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
   private const float DEFAULT_SPEED = 5.0f;
@@ -13,7 +11,6 @@ public class PlayerController : MonoBehaviour
 
   public float runningSpeed = DEFAULT_SPEED;
   public float jumpForce = DEFAULT_JUMP_FORCE;
-  public bool isGrounded = true;
   private bool _do_jump = false;
   private bool _is_dead = false;
 
@@ -22,6 +19,9 @@ public class PlayerController : MonoBehaviour
   private SpriteRenderer spriteRenderer = null;
   private static readonly int SpeedID = Animator.StringToHash("speed");
 
+  [SerializeField] private LayerMask _layerMask;
+
+  [SerializeField] private Transform _groundCheck;
   public float horizontalInput = 0.0f;
 
   private void Awake()
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     //horizontalInput = Input.GetAxis("Horizontal");
     transform.Translate(Vector3.right * (horizontalInput * runningSpeed * Time.deltaTime));
 
-    if (Input.GetButton("Jump") && isGrounded)
+    if (Input.GetButtonDown("Jump") && isGround())
     {
       _do_jump = true;
     }
@@ -53,16 +53,7 @@ public class PlayerController : MonoBehaviour
     if (_do_jump)
     {
       this.rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-      isGrounded = false;
       _do_jump = false;
-    }
-  }
-  
-  private void OnCollisionEnter2D(Collision2D collision)
-  {
-    if (collision.gameObject.CompareTag("Ground"))
-    {
-      isGrounded = true;
     }
   }
 
@@ -90,5 +81,11 @@ public class PlayerController : MonoBehaviour
       spriteRenderer.flipX = true;
     }
 
+  }
+
+
+  bool isGround()
+  {
+    return Physics2D.OverlapCircle(_groundCheck.position, 0.2f,_layerMask);
   }
 }
