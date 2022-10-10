@@ -59,8 +59,9 @@ public class PlayerController : MonoBehaviour
     if (other.gameObject.CompareTag("Obstacle"))
     {
       print("|I Just died f in the chat BOIZ");
-      transform.position = new Vector3( 1337,1337,0);
+      //transform.position = new Vector3( 1337,1337,0);
       _is_dead = true;
+      gameObject.SetActive(false);
     }
   }
 
