@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,20 @@ public class Projectile : MonoBehaviour
   [SerializeField] bool _go_right = true;
 
   private PlayerController _player_ref = null;
-  // Start is called before the first frame update
+  
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+	    if (col.CompareTag("Obstacle"))
+	    {
+		    col.gameObject.SetActive(false);
+		    print("I hit the thing");
+		    
+		    Destroy(gameObject);
+	    }
+    }
+
+
+    // Start is called before the first frame update
     void Start()
     {
 	     _player_ref = FindObjectOfType<PlayerController>();
@@ -30,4 +44,6 @@ public class Projectile : MonoBehaviour
     {
 	    _go_right = go_right;
     }
+
+
 }
