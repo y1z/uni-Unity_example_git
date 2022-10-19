@@ -1,6 +1,5 @@
 using System;
 using Unity.VisualScripting;
-using UnityEditor.SearchService;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Vector2 = UnityEngine.Vector2;
@@ -26,6 +25,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private Transform _groundCheck;
 	public float horizontalInput = 0.0f;
 	[SerializeField] private GameObject _projectile_check = null;
+	[SerializeField] private SpriteRenderer _sprite_renderer = null;
 	public Object projectile_prefab;
 
 	private void Awake()
@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
 		rigidbody = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
+		_sprite_renderer = GetComponent<SpriteRenderer>();
 		_do_jump = false;
 		_is_dead = false;
 		horizontalInput = 0.0f;
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
 		if (Input.GetKeyDown("k"))
 		{
-			Instantiate(projectile_prefab, transform.position, Quaternion.identity);
+			Instantiate(projectile_prefab, _projectile_check.transform.position, Quaternion.identity);
 		}
 
 		flip_sprite(horizontalInput);
@@ -90,15 +91,19 @@ public class PlayerController : MonoBehaviour
 		Vector2 localScale = transform.localScale;
 		if (direction > float.Epsilon)
 		{
-			localScale.x = 1.0f;
-			transform.localScale = localScale;
+			
+//	localScale.x = 1.0f;
+//	transform.localScale = localScale;
+			_sprite_renderer.flipX = false;
 			_is_facing_right = true;
+			_is_facing_right = !_sprite_renderer.flipX ;
 		}
 		else if (direction < -float.Epsilon)
 		{
-			localScale.x = -1.0f;
-			transform.localScale = localScale;
-			_is_facing_right = false;
+	//localScale.x = -1.0f;
+	//transform.localScale = localScale;
+			_sprite_renderer.flipX = true;
+			_is_facing_right = !_sprite_renderer.flipX ;
 		}
 	}
 
