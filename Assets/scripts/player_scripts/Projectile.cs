@@ -37,9 +37,7 @@ public class Projectile : MonoBehaviour
 	      col.gameObject.SetActive(false);
 		    gameObject.SetActive(false);
 		    print("I hit the thing");
-		    
 		    Destroy(gameObject);
-	      
       }
       
     }
@@ -48,17 +46,6 @@ public class Projectile : MonoBehaviour
     {
 	    _go_right = go_right;
     }
-    
-  // private void OnTriggerEnter2D(Collider2D col)
-  // {
-	//   if (col.CompareTag("Obstacle"))
-//   {
-//	    col.gameObject.SetActive(false);
-//	    print("I hit the thing");
-//	    
-//	    Destroy(gameObject);
-//   }
- // }
 
 
 }

@@ -92,16 +92,12 @@ public class PlayerController : MonoBehaviour
 		if (direction > float.Epsilon)
 		{
 			
-//	localScale.x = 1.0f;
-//	transform.localScale = localScale;
 			_sprite_renderer.flipX = false;
 			_is_facing_right = true;
 			_is_facing_right = !_sprite_renderer.flipX ;
 		}
 		else if (direction < -float.Epsilon)
 		{
-	//localScale.x = -1.0f;
-	//transform.localScale = localScale;
 			_sprite_renderer.flipX = true;
 			_is_facing_right = !_sprite_renderer.flipX ;
 		}
