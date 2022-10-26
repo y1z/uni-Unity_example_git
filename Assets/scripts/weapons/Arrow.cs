@@ -9,11 +9,13 @@ public sealed class Arrow : MonoBehaviour
     private Rigidbody2D _rb;
     private BoxCollider2D _box;
     public LayerMask _mask;
+    [SerializeField] private bool _is_hit; 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _mask =  1 << LayerMask.NameToLayer("Ground");
+        _mask = 1 << LayerMask.NameToLayer("Ground");// | 1 << LayerMask.NameToLayer("Player");
         _box = GetComponent<BoxCollider2D>();
+        _is_hit = false;
     }
 
     private void Update()
@@ -23,8 +25,12 @@ public sealed class Arrow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float angle = Mathf.Atan2(_rb.velocity.y, _rb.velocity.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, new  Vector3(0.0f,0.0f,1.0f) );
+        if (!_is_hit)
+        {
+            
+            float angle = Mathf.Atan2(_rb.velocity.y, _rb.velocity.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, new  Vector3(0.0f,0.0f,1.0f) );
+        }
     }
 
 
@@ -37,6 +43,9 @@ public sealed class Arrow : MonoBehaviour
         //Physics2D.OverlapArea(_box.bounds.min, _box.bounds.max, _mask);
         if (!Physics2D.OverlapBox(_box.transform.position, _box.size, angle, _mask)) return;
         
+        _is_hit = true;
+        _rb.isKinematic = true;
+        _rb.velocity = Vector2.zero;
         Destroy(gameObject);
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8483107079116289527}
   - component: {fileID: 2607102399553540029}
   - component: {fileID: 55400120711459501}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArrowWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a10490cd2a804cf40afa1bb82886043e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mask:
+    serializedVersion: 2
+    m_Bits: 0
+  _is_hit: 0
 --- !u!61 &2607102399553540029
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -112,7 +116,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.05, y: -0.03}
+  m_Offset: {x: 0, y: -0.03}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -123,7 +127,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.18, y: 0.09}
+  m_Size: {x: 0.29, y: 0.18}
   m_EdgeRadius: 0
 --- !u!50 &55400120711459501
 Rigidbody2D:
