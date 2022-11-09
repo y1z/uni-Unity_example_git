@@ -7,10 +7,15 @@ using UnityEngine.UI;
 public class ClockTextUi : MonoBehaviour
 {
   [SerializeField] private Text _text;
-  
+  [SerializeField] private TextUtility.TextColor _color = TextUtility.TextColor.NONE; 
   private void Awake()
   {
     _text = GetComponent<Text>();
+
+    if (_color == TextUtility.TextColor.NONE)
+    {
+      _color = TextUtility.TextColor.default_color;
+    }
   }
 
 
@@ -21,7 +26,7 @@ public class ClockTextUi : MonoBehaviour
     string minute = LeadingZeros(now.Minute);
     string second = LeadingZeros(now.Second);
     _text.text = hour + ":" + minute + ":" + second;
-
+    _text.text = TextUtility.add_color_modifier(_text.text,_color);
   }
 
 
